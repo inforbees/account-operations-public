@@ -1,0 +1,387 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const switchToggle = document.getElementById('ibs-sign-in-sign-up-switch-toggle');
+        const signInForm = document.getElementById('ibs-sign-in-form');
+        const signUpForm = document.getElementById('ibs-sign-up-form');
+
+        switchToggle.addEventListener('change', function () {
+            if (switchToggle.checked) {
+                signInForm.classList.remove('ibs-hidden');
+                signUpForm.classList.add('ibs-hidden');
+            } else {
+                signInForm.classList.add('ibs-hidden');
+                signUpForm.classList.remove('ibs-hidden');
+            }
+        });
+    });
+
+    function validatePasswordMatch() {
+        var password = document.getElementById("ibs-sign-up-password").value;
+        var confirmPassword = document.getElementById("ibs-sign-up-confirm-password").value;
+
+        if (password != confirmPassword) {
+            document.getElementById("ibs-sign-up-password-match-tooltip").style.visibility = "visible";
+            document.getElementById("ibs-sign-up-password-match-tooltip").style.opacity = "1";
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+
+<style>
+    /*----Switch button CSS----*/
+    .ibs-sign-in-sign-up-switch-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .ibs-sign-in-sign-up-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        background-color: #f4d528;
+        border-radius: 34px;
+    }
+
+    .ibs-sign-in-sign-up-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .ibs-sign-in-sign-up-switch-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #000;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+    .ibs-sign-in-sign-up-switch-slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: auto; /* Set left to auto */
+        right: 4px; /* Set right to initial position */
+        bottom: 4px;
+        background-color: #f4d528;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .ibs-sign-in-sign-up-switch-slider {
+        background-color: #000;
+    }
+
+    input:checked + .ibs-sign-in-sign-up-switch-slider:before {
+        background-color: #f4d528;
+        -webkit-transform: translateX(-26px); /* Reverse the direction by using negative value */
+        -ms-transform: translateX(-26px);
+        transform: translateX(-26px);
+    }
+
+    .ibs-sign-in-sign-up-switch-label-sign-in {
+        color: #000;
+        margin-right: 15px;
+        font-weight: bold;
+    }
+
+    .ibs-sign-in-sign-up-switch-label-sign-up {
+        color: #000;
+        margin-left: 15px;
+        font-weight: bold;
+    }
+
+    .ibs-form-container {
+        width: 300px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .ibs-hidden {
+        display: none;
+    }
+
+    /*----Sign In form CSS----*/
+    .ibs-sign-in-form {
+        width: 300px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .ibs-sign-in-form h2 {
+        margin-bottom: 20px;
+        color: #000;
+        text-align: center;
+    }
+
+    .ibs-sign-in-form input[type="text"],
+    .ibs-sign-in-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .ibs-sign-in-form input[type="checkbox"] {
+        margin-right: 5px;
+        /* Ensure checkbox is visible */
+        -webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        appearance: checkbox;
+    }
+
+    .ibs-sign-in-form input[type="button"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #f4d528;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .ibs-sign-in-form input[type="button"]:hover {
+        background-color: #333;
+    }
+
+    /*----Sign Up form CSS----*/
+    .ibs-sign-up-form {
+        width: 300px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .ibs-sign-up-form h2 {
+        margin-bottom: 20px;
+        color: #000;
+        text-align: center;
+    }
+
+    .ibs-sign-up-form input[type="text"],
+    .ibs-sign-up-form input[type="email"],
+    .ibs-sign-up-form input[type="tel"],
+    .ibs-sign-up-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .ibs-sign-up-form input[type="button"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #f4d528;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .ibs-sign-up-form input[type="button"]:hover {
+        background-color: #333;
+    }
+
+    .ibs-sign-up-password-match-tooltip {
+        position: relative;
+        background-color: #000;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+        margin-top: 5px;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .ibs-sign-up-form input[type="password"]:focus + #ibs-sign-up-password-match-tooltip {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    /*----Sign Out button CSS----*/
+    .ibs-sign-out-button {
+        display: none;
+        background-color: #f4d528;
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .ibs-sign-out-button:hover {
+        background-color: #e2c610;
+    }
+</style>
+<body>
+    <button class="ibs-sign-out-button" id="ibs-sign-out-button">Sign Out</button>
+
+    <div class="ibs-sign-in-sign-up-switch-container">
+        <span class="ibs-sign-in-sign-up-switch-label-sign-in">Sign In</span>
+        <label class="ibs-sign-in-sign-up-switch">
+            <input type="checkbox" id="ibs-sign-in-sign-up-switch-toggle" checked>
+            <span class="ibs-sign-in-sign-up-switch-slider round"></span>
+        </label>
+        <span class="ibs-sign-in-sign-up-switch-label-sign-up">Sign Up</span>
+    </div>
+
+    <div class="ibs-form-container" id="ibs-sign-in-form">
+        <div class="ibs-sign-in-form">
+            <h2>Sign In</h2>
+            <form action="#" method="post" id="ibs-sign-in-form">
+                <input type="text" name="ibs-sign-in-username-or-email" id="ibs-sign-in-username-or-email" placeholder="Username/Email" required><br><br>
+                <input type="password" name="ibs-sign-in-password" id="ibs-sign-in-password" placeholder="Password" required><br><br>
+                <label for="ibs-keep-signed-in">
+                    <input type="checkbox" name="ibs-keep-signed-in" id="ibs-keep-signed-in"> Keep me signed in
+                </label><br><br>
+                <input type="button" value="Sign In" id="ibs-sign-in-button">
+            </form>
+        </div>
+    </div>
+
+    <div class="ibs-form-container ibs-hidden" id="ibs-sign-up-form">
+        <div class="ibs-sign-up-form">
+            <h2>Sign Up</h2>
+            <form action="#" method="post" id="ibs-sign-up-form">
+                <input type="text" name="ibs-sign-up-username" id="ibs-sign-up-username" placeholder="Username" required><br><br>
+                <input type="text" name="ibs-sign-up-first-name" id="ibs-sign-up-first-name" placeholder="First Name" required><br><br>
+                <input type="text" name="ibs-sign-up-middle-name" id="ibs-sign-up-middle-name" placeholder="Middle Name (Optional)" required><br><br>
+                <input type="text" name="ibs-sign-up-last-name" id="ibs-sign-up-last-name" placeholder="Last Name" required><br><br>
+                <input type="tel" name="ibs-sign-up-phone" id="ibs-sign-up-phone" placeholder="Phone Number" required><br><br>
+                <input type="email" name="ibs-sign-up-email" id="ibs-sign-up-email" placeholder="Email" required><br><br>
+                <input type="password" name="ibs-sign-up-password" id="ibs-sign-up-password" placeholder="Password" required><br><br>
+                <input type="password" name="ibs-sign-up-confirm-password" id="ibs-sign-up-confirm-password" placeholder="Confirm Password" required><br>
+                <div class="ibs-sign-up-password-match-tooltip" id="ibs-sign-up-password-match-tooltip">Passwords don't match.</div>
+                <input type="button" value="Sign Up" id="ibs-sign-up-button" onclick="return validatePasswordMatch();">
+            </form>
+        </div>
+    </div>
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "****confidential****",
+        authDomain: "****confidential****",
+        projectId: "****confidential****",
+        storageBucket: "****confidential****",
+        messagingSenderId: "****confidential****",
+        appId: "****confidential****",
+        measurementId: "****confidential****"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+  	const db = getFirestore(app);
+    console.log(app);
+
+    //Sign In code
+    document.getElementById("ibs-sign-in-button").addEventListener("click", function() {
+        var email =  document.getElementById("ibs-sign-in-username-or-email").value;
+        var password = document.getElementById("ibs-sign-in-password").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+        alert(user.email+" Signed in successfully!");
+        document.getElementById('ibs-sign-out-button').style.display = 'block';
+        })
+        .catch((error) => {
+        alert("Error");
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        alert(errorMessage);
+        });		  		  
+    });
+
+    //Sign Up code
+    document.getElementById("ibs-sign-up-button").addEventListener("click", function() {
+        var email =  document.getElementById("ibs-sign-up-email").value;
+        var password = document.getElementById("ibs-sign-up-password").value;
+        var username = document.getElementById("ibs-sign-up-username").value;
+        var firstName = document.getElementById("ibs-sign-up-first-name").value;
+        var middleName = document.getElementById("ibs-sign-up-middle-name").value;
+        var lastName = document.getElementById("ibs-sign-up-last-name").value;
+        var phoneNumber = document.getElementById("ibs-sign-up-phone").value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+
+            // Save user details to Firestore
+            addDoc(collection(db, "users"), {
+                uid: user.uid,
+                email: email,
+                username: username,
+                firstName: firstName,
+              	middleName: middleName,
+                lastName: lastName,
+                phoneNumber: phoneNumber
+            })
+            .then(() => {
+                console.log("User details added to Firestore");
+                alert("Signed up successfully!");
+            })
+            .catch((error) => {
+                console.error("Error adding user details: ", error);
+            });
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage);
+            alert(error);
+        });		  		  
+    });
+
+    //Sign Out code
+    document.getElementById("ibs-sign-out-button").addEventListener("click", function() {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            console.log('Sign-out successful.');
+            alert('Sign-out successful.');
+            document.getElementById('ibs-sign-out-button').style.display = 'none';
+            console.log(user);
+        }).catch((error) => {
+            // An error happened.
+            console.log('An error happened.');
+        });		  		  
+    });
+</script>
